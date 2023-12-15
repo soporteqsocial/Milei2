@@ -4,52 +4,39 @@ import { HiDocumentDownload } from 'react-icons/hi';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { Button, Tooltip } from 'antd';
-import { useEffect, useState } from 'react';
 
 export default function OcurrenciaModelo() {
   const tweets = useSelector((state) => state.datosFiltrados);
-  const filtroModelo = useSelector (state => state.filtros)
   // console.log(tweets)
-
-
-
-
   const atributos = [
-    'Atributos',
-    'Clima social',
+    'Atributos de Personalidad',
+    'Atributos de Politicos',
     'Continuidad y cambio',
     'Emociones Básicas (Plutchik)',
     'Preocupaciones',
+    'Preocupaciones - Ven',
     'Red motivacional del voto',
     'Sentimientos',
+    'Voto Emocional y Racional'
   ];
-   
-  const [modeloSeleccionado, setModeloSeleccionado] = useState(null);
-  useEffect(() => {
-    if (filtroModelo.length = 0) {
-      const modeloFiltrado = categoriasModelosSelector.find(value => value.modelo === filtroModelo);
-      setModeloSeleccionado(modeloFiltrado);
-      console.log('aca filtroModelo', filtroModelo)
-      console.log('aca categoriasModelosSelector', categoriasModelosSelector)
-      console.log ('aca modeloFiltrado', modeloFiltrado)
-    }
-  }, [filtroModelo]);
 
   const categoriasModelosSelector = [
-    {modelo: "Atributos", categorias: ["Autoridad","Capacidad","Cercanía","Coherencia","Deshonestidad","Dinamismo","Falta de Autoridad","Falta de Capacidad","Falta de cercanía","Falta de Responsabilidad","Falta de sensibilidad","Falta de Trayectoria","Honestidad","Incoherencia","Interacción","Responsabilidad","Sensibilidad","Trayectoria" ]},
-    {modelo: "Clima social", categorias:["Autoritarismo","Cambio","Calma","Continuidad","Democracia","Desorden","Despolitizacion","División","Estabilidad","Individualismo","Inestabilidad", "Injusticia","Irritación","Justicia","Orden", "Unidad","Pertenencia Social","Politizacion"]},
-    {modelo:"Continuidad y cambio", categorias: ["Cambio", "Continuidad"] },
-    {modelo:"Emociones Básicas (Plutchik)", categorias: ["Alegría", "Previsión", "Rechazo", "Confianza", "Ira", "Miedo", "Sorpresa", "Tristeza"] },
-    {modelo:"Preocupaciones", categorias: ["Ambiente", "Conflictividad", "Corrupción", "Derechos Humanos","Educación", "Economía", "Trabajo","Tránsito y Vialidad", "Salud","Seguridad", "Vivienda","Obra Pública"]},
-    { modelo: "Red motivacional del voto", categorias: ["Voto Blanco", "Voto Clientelar", "Voto Emocional","voto Ganador", "Voto Ideológico", "Voto Partidario", "Voto Plebiscitario", "Voto Racional", "Voto de Ira", "Voto del Miedo", "Voto por carisma", "Voto Útil"] },
-    {modelo:"Sentimientos", categorias: ["Agotamiento","Agrado","Amor","Alegría","Altivez","Apatía","Aversión","Calma","Certeza","Compasíon","Desagrado","Deseo","Dolor","Duda","Entusiasmo","Frustración","Humillacion","Odio","Placer","Satisfacción","Tensíon","Valor","Vigor"]},
-    // { modelo: "Voto Emocional y Racional", categorias: ["Voto Emocional", "Voto Racional"] }
-    ];
+    { modelo: "Sentimientos", categorias: ["Agotamiento", "Apatía", "Alegría", "Altivez", "Amor", "Aversión", "Calma", "Certeza", "Compasión", "Deseo", "Desagrado", "Dolor", "Entusiasmo", "Frustración", "Humillación", "Ira", "Miedo", "Placer", "Satisfacción", "Tensión", "Tristeza", "Valor"] },
+    { modelo: "Atributos de Personalidad", categorias: ["Agrado", "Antipatico", "Calidez", "Competencia comunicativa", "Conocimiento", "Creatividad", "Credibilidad", "Desconfianza", "Deshonestidad", "Dinamismo", "Firmeza", "Fragilidad", "Frialdad", "Honestidad", "Ignorancia", "Insensibilidad", "Insensibilidad social", "Inmoralidad", "Laboriosidad", "Moralidad", "Mediocridad", "No defensa de lo nacional", "Ociosidad", "Optimismo", "Pesimismo", "Responsable", "Respeto", "Sensibilidad", "Sensibilidad social", "Sociable"] },
+    { modelo: "Atributos de Politicos", categorias: ["Abierto al diálogo", "Autoridad", "Cerrado al diálogo", "Competencia comunicativa", "Conocimiento", "Defensa de lo nacional", "Deshonestidad", "Experiencia", "Falta de autoridad", "Incoherencia", "Incompetencia comunicativa", "Inexperiencia", "Insensibilidad social", "Inpopular", "Ineptitud de gestión", "Ignorancia", "No defensa de lo nacional", "No respeto institucional", "Respeto institucional"] },
+    { modelo: "Continuidad y cambio", categorias: ["Cambio", "Continuidad"] },
+    { modelo: "Emociones Básicas (Plutchik)", categorias: ["Alegría", "Anticipación", "Aversión", "Confianza", "Ira", "Miedo", "Sorpresa", "Tristeza"] },
+    { modelo: "Preocupaciones", categorias: ["Ambiente", "Conflictividad", "Corrupción", "Educación", "Inflación", "Salud", "Seguridad", "Trabajo", "Tránsito y transporte", "Vivienda"] },
+    // { modelo: "Preocupaciones - Ven", categorias: ["Ambiente", "Corrupción", "Educación", "Inflación", "Salud", "Seguridad", "Trabajo", "Tránsito y transporte", "Vivienda"] },
+    { modelo: "Red motivacional del voto", categorias: ["Voto Blanco", "Voto Clientelar", "Voto Emocional", "Voto Ganador", "Voto Ideológico", "Voto Partidario", "Voto Plebiscitario", "Voto Racional", "Voto de Ira", "Voto del Miedo", "Voto por carisma", "Voto Útil"] },
+    { modelo: "Voto Emocional y Racional", categorias: ["Voto Emocional", "Voto Racional"] }
+  ];
 
   function contarTweetsYcategorias(tweets, categoriasModelos) {
     const conteoPorPropiedad = {};
   
     const modelosPresentes = categoriasModelos.map((categoriaModelo) => categoriaModelo.modelo);
+  
     tweets.forEach((tweet) => {
       for (const propiedad in tweet) {
         if (modelosPresentes.includes(propiedad) && Array.isArray(tweet[propiedad]) && tweet[propiedad].length > 0) {
@@ -71,8 +58,10 @@ export default function OcurrenciaModelo() {
         conteoPorPropiedad[propiedad] = conteoPorPropiedad[propiedad].slice(0, 3);
       }
     }
+  
     return conteoPorPropiedad;
   }
+
     // Función para contar los tweets con datos en un atributo específico
     const contarTweetsConDatos = (tweets, atributo) => {
       const totalTweets = tweets.length;
@@ -90,45 +79,44 @@ export default function OcurrenciaModelo() {
   const resultados = contarTweetsYcategorias(tweets, categoriasModelosSelector);
   // console.log(resultados);
 
-  function transformarDatosEnFormatoDeseado(
-    resultados,
-    categoriasModelos,
-    tweets,
-    modeloSeleccionado,
- 
-  ) {
-    const root = { name: 'root', children: [] };
- 
-    
-    // console.log('llegue hasta aca', modeloSeleccionado)
-
-    if (modeloSeleccionado && modeloSeleccionado.modelo) {
-      const categoriasOrdenadas = modeloSeleccionado.categorias.map((categoria) => ({
-        name: categoria,
-        value: resultados[categoria] || 0,
-      })).sort((a, b) => b.value - a.value).slice(0, 3);
+  function transformarDatosEnFormatoDeseado(resultados, categoriasModelos, tweets) {
+    const root = { name: "root", children: [] };
   
-      const modeloConValores = {
-        nameModelo: modeloSeleccionado.modelo,
-        brand: modeloSeleccionado.modelo,
-        value: resultados[modeloSeleccionado.modelo] || 0,
+    // Obtener los modelos con sus valores
+    const modelosConValores = categoriasModelos.map((categoriaModelo) => {
+    
+  
+      // Ordenar las categorías por mayor valor
+      const categoriasOrdenadas = categoriaModelo.categorias
+        .map((categoria) => ({
+          name: categoria,
+          value: resultados[categoria] || 0, // Valor predeterminado: 0 si no se encontró la clave en resultados
+        }))
+        .sort((a, b) => b.value - a.value)
+        .slice(0, 3); // Tomar las 3 categorías con los valores más altos
+  
+      return {
+        nameModelo: categoriaModelo.modelo,
+        brand: categoriaModelo.modelo,
+        value: resultados[categoriaModelo.modelo] || 0, // Valor predeterminado: 0 si no se encontró la clave en resultados
         children: categoriasOrdenadas,
       };
+    });
   
-      root.children.push(modeloConValores);
-    }
+    // Ordenar los modelos por mayor valor
+    modelosConValores.sort((a, b) => b.value - a.value);
+  
+    root.children = modelosConValores;
   
     return root;
   }
-  const formatoDeseado = transformarDatosEnFormatoDeseado(
-    resultados,
-    categoriasModelosSelector,
-    tweets,
-    modeloSeleccionado
-  );
+  
   // Ejemplo de uso con los resultados y el array de modelos
- 
+  const formatoDeseado = transformarDatosEnFormatoDeseado(resultados, categoriasModelosSelector);
   // console.log("FORMATO DESEADO",formatoDeseado);
+
+
+
   const config = {
     data: formatoDeseado,
     colorField: 'nameModelo',
@@ -152,6 +140,8 @@ export default function OcurrenciaModelo() {
     },
   };
 
+
+  
   const handleDownloadExcel = () => {
     if (formatoDeseado && formatoDeseado.children && formatoDeseado.children.length > 0) {
       // Crear una matriz para almacenar todos los datos
@@ -191,10 +181,16 @@ export default function OcurrenciaModelo() {
       saveAs(data, fileName);
     }
   };
+  
+  
+  
+  
+  
 
   return (
     <div>
-      <div className='titulo-carta'>Modelos</div>    
+      <div className='titulo-carta'>Modelos</div>
+     
       <div className='subtitulo-carta'>
         <div>Eventos categorizados por modelos</div>
         <Tooltip title="Descargar Excel">

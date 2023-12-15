@@ -48,17 +48,17 @@ const MenuDesplegable = () => {
     <SubMenu icon={< AiOutlineCluster />} title="Modelos" >
 
 
-        <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Atributos")}>
+        <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Atributos de Personalidad")}>
         
-            <span>Atributos</span>
-            <Link to="/dashboard/Atributos"></Link>
+            <span>Atributo de Personalidad</span>
+            <Link to="/dashboard/Atributos de Personalidad"></Link>
         </Menu.Item>
 
 
-        <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Clima social")}>
+        <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Atributos de Politicos")}>
             
-            <span>Clima social</span>
-            <Link to="/dashboard/Clima social"></Link>
+            <span>Atributo de Políticos</span>
+            <Link to="/dashboard/Atributos de Politicos"></Link>
         </Menu.Item>
 
         <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Continuidad y cambio")}>
@@ -97,11 +97,11 @@ const MenuDesplegable = () => {
         <Link to="/dashboard/Sentimientos"></Link>
     </Menu.Item>
 
-    {/* <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Voto Emocional y Racional")}>
+    <Menu.Item icon={<AiOutlineCluster /> } onClick={()=>handleMenuClick("Voto Emocional y Racional")}>
         
         <span>Voto emocional y racional</span>
         <Link to="/dashboard/Voto Emocional y Racional"></Link>
-    </Menu.Item> */}
+    </Menu.Item>
 
    
 
